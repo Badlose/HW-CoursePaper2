@@ -3,28 +3,28 @@ package pro.sky.CoursePaper2_Badlose.ExaminerService.Service.Impl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pro.sky.CoursePaper2_Badlose.ExaminerService.Model.Question;
-import pro.sky.CoursePaper2_Badlose.ExaminerService.Repository.Impl.JavaQuestionsRepositoryImpl;
+import pro.sky.CoursePaper2_Badlose.ExaminerService.Repository.Impl.MathQuestionsRepositoryImpl;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JavaQuestionServiceImplTest {
+class MathQuestionServiceImplTest {
 
-    private JavaQuestionsRepositoryImpl javaQuestionsRepository;
+    private MathQuestionsRepositoryImpl mathQuestionsRepository;
 
     @BeforeEach
     public void clear() {
-        javaQuestionsRepository = new JavaQuestionsRepositoryImpl();
+        mathQuestionsRepository = new MathQuestionsRepositoryImpl();
     }
 
     @Test
-    public void shouldAddNewJavaQuestion() {
+    public void shouldAddNewMathQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
 
         //when
-        Question actualQuestion = javaQuestionsRepository.addQuestion(
+        Question actualQuestion = mathQuestionsRepository.addQuestion(
                 expectedQuestion.getQuestion(),
                 expectedQuestion.getAnswer());
 
@@ -33,16 +33,16 @@ class JavaQuestionServiceImplTest {
     }
 
     @Test
-    public void shouldNotAddNewJavaQuestion() {
+    public void shouldNotAddNewMathQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
-        javaQuestionsRepository.addPreparedQuestion(expectedQuestion);
-        int expectedSize = javaQuestionsRepository.getAll().size();
+        mathQuestionsRepository.addPreparedQuestion(expectedQuestion);
+        int expectedSize = mathQuestionsRepository.getAll().size();
 
         //when
-        Question actualQuestion = javaQuestionsRepository.addQuestion(
+        Question actualQuestion = mathQuestionsRepository.addQuestion(
                 expectedQuestion.getQuestion(), null);
-        int actualSize = javaQuestionsRepository.getAll().size();
+        int actualSize = mathQuestionsRepository.getAll().size();
 
         //then
         assertEquals(expectedSize, actualSize);
@@ -50,67 +50,67 @@ class JavaQuestionServiceImplTest {
 
 
     @Test
-    void shouldAddNewPreparedJavaQuestion() {
+    void shouldAddNewPreparedMathQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
 
         //when
-        Question actualQuestion = javaQuestionsRepository.addPreparedQuestion(expectedQuestion);
+        Question actualQuestion = mathQuestionsRepository.addPreparedQuestion(expectedQuestion);
 
         //then
         assertEquals(expectedQuestion, actualQuestion);
     }
+
 
     @Test
     void shouldNotAddNewPreparedJavaQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
-        javaQuestionsRepository.addPreparedQuestion(expectedQuestion);
-        int expectedSize = javaQuestionsRepository.getAll().size();
+        mathQuestionsRepository.addPreparedQuestion(expectedQuestion);
+        int expectedSize = mathQuestionsRepository.getAll().size();
 
         //when
-        Question actualQuestion = javaQuestionsRepository.addPreparedQuestion(null);
-        int actualSize = javaQuestionsRepository.getAll().size();
+        Question actualQuestion = mathQuestionsRepository.addPreparedQuestion(null);
+        int actualSize = mathQuestionsRepository.getAll().size();
 
         //then
         assertEquals(expectedSize, actualSize);
     }
 
     @Test
-    public void shouldFindJavaQuestion() {
+    void shouldFindMathQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
-        javaQuestionsRepository.addQuestion(
-                expectedQuestion.getQuestion(),
-                expectedQuestion.getAnswer());
+        mathQuestionsRepository.addQuestion(expectedQuestion.getQuestion(), expectedQuestion.getAnswer());
 
         //when
-        Question actualQuestion = javaQuestionsRepository.findQuestion(expectedQuestion.getQuestion());
+        Question actualQuestion = mathQuestionsRepository.findQuestion(expectedQuestion.getQuestion());
         //then
         assertEquals(expectedQuestion, actualQuestion);
     }
 
     @Test
-    public void shouldNotFindJavaQuestion() {
+    public void shouldNotFindMAthQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
         Question fakeQuestion = new Question("fake", "fake");
 
         //when
-        Question actualQuestion = javaQuestionsRepository.findQuestion(fakeQuestion.getQuestion());
+        Question actualQuestion = mathQuestionsRepository.findQuestion(fakeQuestion.getQuestion());
 
         //then
         assertNotEquals(expectedQuestion, actualQuestion);
     }
 
+
     @Test
-    public void shouldRemoveJavaQuestion() {
+    void shouldRemoveMathQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
-        javaQuestionsRepository.addQuestion(expectedQuestion.getQuestion(), expectedQuestion.getAnswer());
+        mathQuestionsRepository.addQuestion(expectedQuestion.getQuestion(), expectedQuestion.getAnswer());
 
         //when
-        Question actualQuestion = javaQuestionsRepository.removeQuestion(expectedQuestion.getQuestion(),
+        Question actualQuestion = mathQuestionsRepository.removeQuestion(expectedQuestion.getQuestion(),
                 expectedQuestion.getAnswer());
         //then
         assertEquals(expectedQuestion, actualQuestion);
@@ -120,19 +120,18 @@ class JavaQuestionServiceImplTest {
     public void shouldNotRemoveJavaQuestion() {
         //given
         Question expectedQuestion = new Question("123", "123");
-        javaQuestionsRepository.addQuestion(expectedQuestion.getQuestion(), expectedQuestion.getAnswer());
+        mathQuestionsRepository.addQuestion(expectedQuestion.getQuestion(), expectedQuestion.getAnswer());
         Question fakeQuestion = new Question("fake", "fake");
 
         //when
-        Question actualQuestion = javaQuestionsRepository.removeQuestion(fakeQuestion.getQuestion(),
+        Question actualQuestion = mathQuestionsRepository.removeQuestion(fakeQuestion.getQuestion(),
                 fakeQuestion.getAnswer());
         //then
         assertNotEquals(expectedQuestion, actualQuestion);
     }
 
-
     @Test
-    public void shouldGetAllJavaQuestions() {
+    void shouldGetAllMathQuestions() {
         //given
         Question question1 = new Question("1", "1");
         Question question2 = new Question("2", "2");
@@ -140,15 +139,16 @@ class JavaQuestionServiceImplTest {
         List<Question> expectedQuestionsList = new ArrayList<>(
                 List.of(question1, question2, question3));
 
-        javaQuestionsRepository.addPreparedQuestion(question1);
-        javaQuestionsRepository.addPreparedQuestion(question2);
-        javaQuestionsRepository.addPreparedQuestion(question3);
+        System.out.println(mathQuestionsRepository.getAll());
+        mathQuestionsRepository.addPreparedQuestion(question1);
+        mathQuestionsRepository.addPreparedQuestion(question2);
+        mathQuestionsRepository.addPreparedQuestion(question3);
+
 
         //when
-        List<Question> actualQuestionsList = javaQuestionsRepository.getAll();
+        List<Question> actualQuestionsList = mathQuestionsRepository.getAll();
         //then
         assertEquals(expectedQuestionsList, actualQuestionsList);
     }
-
 
 }

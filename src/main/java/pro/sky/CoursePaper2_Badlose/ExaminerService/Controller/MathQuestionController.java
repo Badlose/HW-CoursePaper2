@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.CoursePaper2_Badlose.ExaminerService.Model.Question;
-import pro.sky.CoursePaper2_Badlose.ExaminerService.Service.QuestionService;
+import pro.sky.CoursePaper2_Badlose.ExaminerService.Service.Impl.MathQuestionServiceImpl;
+
 
 import java.util.List;
 
@@ -14,23 +15,22 @@ import java.util.List;
 
 public class MathQuestionController {
 
-    private final QuestionService questionService;
+    private final MathQuestionServiceImpl mathQuestionService;
 
-    public MathQuestionController(QuestionService questionService) {
-        this.questionService = questionService;
+    public MathQuestionController(MathQuestionServiceImpl mathQuestionService) {
+        this.mathQuestionService = mathQuestionService;
     }
-
 
     @GetMapping
     public List<Question> getAll() {
-        return questionService.getAll();
+        return mathQuestionService.getAll();
     }
 
     @GetMapping("/add")
     public Question addQuestion(@RequestParam(value = "QuestionText", required = false) String QuestionText,
                                 @RequestParam(value = "QuestionAnswer", required = false) String QuestionAnswer) {
 
-        return questionService.addQuestion(QuestionText, QuestionAnswer);
+        return mathQuestionService.addQuestion(QuestionText, QuestionAnswer);
     }
 
 
@@ -38,12 +38,12 @@ public class MathQuestionController {
     public Question removeQuestion(@RequestParam(value = "QuestionText", required = false) String QuestionText,
                                    @RequestParam(value = "QuestionAnswer", required = false) String QuestionAnswer) {
 
-        return questionService.removeQuestion(QuestionText, QuestionAnswer);
+        return mathQuestionService.removeQuestion(QuestionText, QuestionAnswer);
     }
 
     @GetMapping("/find")
     public Question findQuestion(@RequestParam(value = "question", required = false) String question) {
 
-        return questionService.findQuestion(question);
+        return mathQuestionService.findQuestion(question);
     }
 }

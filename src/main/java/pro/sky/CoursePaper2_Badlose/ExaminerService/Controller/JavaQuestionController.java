@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.CoursePaper2_Badlose.ExaminerService.Model.Question;
-import pro.sky.CoursePaper2_Badlose.ExaminerService.Service.QuestionService;
+import pro.sky.CoursePaper2_Badlose.ExaminerService.Service.Impl.JavaQuestionServiceImpl;
 
 import java.util.List;
 
@@ -14,36 +14,36 @@ import java.util.List;
 
 public class JavaQuestionController {
 
-    private final QuestionService questionService;
+    private final JavaQuestionServiceImpl javaQuestionService;
 
-    public JavaQuestionController(QuestionService questionService) {
-        this.questionService = questionService;
+
+    public JavaQuestionController(JavaQuestionServiceImpl javaQuestionService) {
+        this.javaQuestionService = javaQuestionService;
     }
 
     @GetMapping
     public List<Question> getAll() {
-        return questionService.getAll();
+        return javaQuestionService.getAll();
     }
 
     @GetMapping("/add")
     public Question addQuestion(@RequestParam(value = "QuestionText", required = false) String QuestionText,
                                 @RequestParam(value = "QuestionAnswer", required = false) String QuestionAnswer) {
 
-        return questionService.addQuestion(QuestionText, QuestionAnswer);
+        return javaQuestionService.addQuestion(QuestionText, QuestionAnswer);
     }
-
 
     @GetMapping("/remove")
     public Question removeQuestion(@RequestParam(value = "QuestionText", required = false) String QuestionText,
                                    @RequestParam(value = "QuestionAnswer", required = false) String QuestionAnswer) {
 
-        return questionService.removeQuestion(QuestionText, QuestionAnswer);
+        return javaQuestionService.removeQuestion(QuestionText, QuestionAnswer);
     }
 
     @GetMapping("/find")
     public Question findQuestion(@RequestParam(value = "question", required = false) String question) {
 
-        return questionService.findQuestion(question);
+        return javaQuestionService.findQuestion(question);
     }
 }
 
